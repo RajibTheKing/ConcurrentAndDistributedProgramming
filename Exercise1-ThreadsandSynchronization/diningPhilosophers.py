@@ -16,17 +16,15 @@ class Stick:
 
 
     def putBack(self):
-        self.conditionalLock.acquire()
-        self.isUsed = False
-        self.conditionalLock.notify()
-        self.conditionalLock.release()
+        with self.conditionalLock:
+            self.isUsed = False
+            self.conditionalLock.notify()
 
     def getStick(self):
-        self.conditionalLock.acquire()
-        while self.isUsed == True:
-            self.conditionalLock.wait()
-        self.isUsed = True
-        self.conditionalLock.release()
+        with self.conditionalLock:
+            while self.isUsed == True:
+                self.conditionalLock.wait()
+            self.isUsed = True
 
 
     def isAvailable(self):
@@ -59,11 +57,11 @@ class Philosopher:
 
     def thinkMethod(self):
         print(self.getPhilosopherID() + ": is now thinking")
-        time.sleep(0.5)
+        time.sleep(0.05)
     
     def eatMethod(self):
         print(self.getPhilosopherID() + ":  is now eating!!!!!!!!!!!!!!!!!!")
-        time.sleep(0.5)
+        time.sleep(0.05)
 
     
     def getStick(self, stick):

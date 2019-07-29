@@ -58,6 +58,9 @@ class Chan :
     self.w.put(new_hole)
 
   def is_empty(self) :
+    # If the chan is empty and another thread is waiting to
+    # read the chan, is_empty will suspend, because the other
+    # thread is holding the r_end
 
     r_end = self.r.take()
     self.r.put(r_end)
@@ -66,6 +69,8 @@ class Chan :
     return r_end == w_end
 
   def add_multiple(self, listVal):
+     # It is not guaranteed that there are no other values in
+    # in between the values of the list
     for i in range(0, len(listVal)):
       hole = self.w.take()
       new_hole = MVar()
@@ -73,6 +78,9 @@ class Chan :
       self.w.put(new_hole)
   
   def un_get(self, val): #add new element on using reader pointer
+    # If the chan is empty and another thread is waiting to
+    # read the chan, un_get will suspend and cannot write the
+    # new value
     new_hole = MVar()
     ptr = self.r.take()
     new_hole.put((val, ptr))

@@ -1,5 +1,6 @@
+
 import threading
-import time
+
 class MVar :
 
   def __init__(self) :
@@ -35,92 +36,35 @@ class MVar :
 
 class Chan :
 
-  def __init__(self) :
-
-    hole = MVar()
+  def __init__(self,capacity) : # new
+    
+    self.a = [None] * capacity
+    
     self.r = MVar()
-    self.r.put(hole)
     self.w = MVar()
-    self.w.put(hole)
+    self.w.put(0)
+    self.count = MVar()
+    self.count.put(0)
 
   def read(self) :
     
-    r_end = self.r.take()
-    v,next = r_end.take()
-    self.r.put(next)
-    return v
+    read_position = self.r.take()
+    value = self.a[read_position]
+    old_count = self.count.take()
+    self.count.put(old_count - 1)
+    if old_count == len(self.a): # array was full
+      self.w.put(read_position)
+    if old_count > 1: # array is not empty
+      self.r.put((read_position+1)%len(self.a))
+    return value
 
   def write(self,v) :
-
-    hole = self.w.take()
-    new_hole = MVar()
-    hole.put((v,new_hole))
-    self.w.put(new_hole)
-
-  def is_empty(self) :
-
-    r_end = self.r.take()
-    self.r.put(r_end)
-    w_end = self.w.take()
-    self.w.put(w_end)
-    return r_end == w_end
-
-  def add_multiple(self, listVal):
-    for i in range(0, len(listVal)):
-      hole = self.w.take()
-      new_hole = MVar()
-      hole.put((listVal[i], new_hole))
-      self.w.put(new_hole)
-  
-  def un_get(self, val): #add new element on using reader pointer
-    new_hole = MVar()
-    ptr = self.r.take()
-    new_hole.put((val, ptr))
-    self.r.put(new_hole)
-
-
-
-
-def producer(chanObj,n) :
-  for i in range(n):
-    chanObj.un_get(i)
-
-def consumer(chanObj) :
-
-  sum = 0
-  content = None
-
-  while content != -1 :
-    content = chanObj.read()
-    print("Got value: " + str(content))
-    sum += content
-
-  print(sum+1)
-
-ch = Chan()
-
-t1 = threading.Thread(target=producer, args=(ch,5))
-#t2 = threading.Thread(target=producer, args=(ch,1000))
-#t3 = threading.Thread(target=producer, args=(ch,1000))
-#t4 = threading.Thread(target=producer, args=(ch,1000))
-c1 = threading.Thread(target=consumer, args=(ch,))
-#c2 = threading.Thread(target=consumer, args=(ch,))
-#c3 = threading.Thread(target=consumer, args=(ch,))
-#c4 = threading.Thread(target=consumer, args=(ch,))
-
-t1.start()
-#t2.start()
-#t3.start()
-#t4.start()
-c1.start()
-#c2.start()
-#c3.start()
-#c4.start()
-
-input()
-
-ch.write(-1)
-#ch.write(-1)
-#ch.write(-1)
-#ch.write(-1)
-
+    
+    write_position = self.w.take()
+    self.a[write_position] = v
+    new_count = self.count.take() + 1
+    self.count.put(new_count)
+    if new_count == 1: # array was empty
+      self.r.put(write_position)
+    if new_count < len(self.a): # array is not full
+      self.w.put((write_position + 1) % len(self.a))

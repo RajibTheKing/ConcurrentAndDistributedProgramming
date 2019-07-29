@@ -164,7 +164,7 @@ contr = CounterController(root, sys.argv[1:])
 contr.Initialize()
 root.mainloop()
 
-
+time.sleep(1000 * 0.001)
 print("Program Closed")
 
 # Use root.destroy() to destroy the main window (hidden)

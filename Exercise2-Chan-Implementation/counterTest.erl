@@ -27,13 +27,13 @@ counterInc(Val) ->
 
 startProgram() ->
     Counter_ID = spawn(counterTest, counterInc, [0]),
-    spawn(counterTest, clientLoop, [Counter_ID, 100]),
-    spawn(counterTest, clientLoop, [Counter_ID, 100]),
-    spawn(counterTest, clientLoop, [Counter_ID, 100]),
-    spawn(counterTest, clientLoop, [Counter_ID, 100]),
-    spawn(counterTest, clientLoop, [Counter_ID, 100]),
-    spawn(counterTest, clientLoop, [Counter_ID, 100]),
-    spawn(counterTest, clientLoop, [Counter_ID, 100]),
-    spawn(counterTest, clientLoop, [Counter_ID, 100]),
-    spawn(counterTest, clientLoop, [Counter_ID, 100]),
-    spawn(counterTest, clientLoop, [Counter_ID, 100]).
+    spawn(counterTest, clientLoop, [Counter_ID, 1000]),
+    spawn(counterTest, clientLoop, [Counter_ID, 1000]),
+    spawn(counterTest, clientLoop, [Counter_ID, 1000]),
+    spawn(counterTest, clientLoop, [Counter_ID, 1000]),
+    spawn(counterTest, clientLoop, [Counter_ID, 1000]),
+    spawn(counterTest, clientLoop, [Counter_ID, 1000]),
+    spawn(counterTest, clientLoop, [Counter_ID, 1000]),
+    spawn(counterTest, clientLoop, [Counter_ID, 1000]),
+    spawn(counterTest, clientLoop, [Counter_ID, 1000]),
+    spawn(counterTest, clientLoop, [Counter_ID, 1000]).

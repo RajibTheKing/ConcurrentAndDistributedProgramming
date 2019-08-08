@@ -1,0 +1,81 @@
+Evaluation dates: 
+----------------------------
+1st try: july 8,9,10
+2nd try: september 17th,18th
+3rd try: october 15th
+
+always :: STM Bool -> STM () 
+newAccount :: Int -> STM Account
+newAccount am = do 
+    acc <- newTVar am 
+    always $
+        do
+        am <- readTVar acc 
+        return am >= 0
+
+if a transaction falsifies an invariant it should perform a retry instead of rollback . 
+and suspends on RS of transaction unified with the RS of the invariant. 
+
+Example: Add boolean flag to our invariant . 
+do
+    check <- readTVar switch
+    if check then do
+        am <- readTVar acc
+        return am >- 0
+    else
+        return True
+
+
+invariant are checked at three times: 
+i) when the invariant is defined, when a new variant is created. 
+ii) When the transaction is trying to establish, the invariant tries to commit. at the end of a transaction. 
+iii) whenever an other transaction tries to commit and its WS intersect RS(invariant) /= emtpty 
+
+
+
+Checking an invariant has to consider the WS of the committing... transaction as well. 
+
+alwaysSucceed :: STM () -> STM () 
+
+
+
+do 
+    v1 <- readTVar t1
+    ---------------here we have some operations
+    v2 <- readTVar t2
+    if v1 /= v2 then 
+        loop 
+    else 
+        return ()
+
+
+---------------------------------
+do vl <- readTvar t1 
+   v2 <- readTVar t2 
+   writeTVar t1 (v1 + 1)
+   writeTVar t2 (v2 + 1)
+---------------------------------
+
+
+
+
+
+Example:
+do 
+  v1 <- readTVar t1 
+  .
+  .
+  .
+  .
+  .
+  .
+  vi <- readTVar t2
+
+
+commit: 
+writeTVar t1 42 
+problem: superflous code 
+
+Optimization: 
+commit pashes invalidation messages to all transactions , while read a tvar changed by this commit . therefore, transactions ... 
+with a where the read it. 

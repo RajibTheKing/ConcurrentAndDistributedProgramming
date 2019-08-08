@@ -1,0 +1,55 @@
+Exam date:
+-------------------------------------- 
+9th July && 10th July 
+17th September
+15th October
+
+Duration: less than half an hour. 
+
+
+
+Pessimistik Implementation... 
+Recap... Transactions
+Turing Lectures
+
+-----------------------------------------
+
+readTVar t -> Lock t 
+              if not possible free all locked TVars -> Rollback
+
+writeTVar -> locked t  -->(Yes) unlock RS + (rollback | suspend till is unlocked.. +  rollback | suspend till TVar in RS change + rollback)
+                       -->(No) add (t,42) to WS 
+                       
+
+
+Problem: 
+T1. write t1    ------------1
+    read t2     ------------3
+
+
+T2. write t2    ------------2
+    read t1     ------------4
+
+it's a deadlock 
+
+Solution: 
+==> lock writeTVar as well 
+==> 
+
+
+T1. 
+read t1    1
+read t2    
+
+T2.
+read t1    2
+
+
+optimistic Transactions 2 ways : 
+-----------------------------
+i) using version controling over tvars 
+ii) whenever read a tvar , store information about our transaction.... 
+we can lay back , instead of validation... I will be informated by other transactions... direct notification.  
+
+
+** we lock all tvars ... in Pessimistik transaction

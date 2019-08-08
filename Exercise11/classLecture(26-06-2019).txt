@@ -1,0 +1,25 @@
+(RS0 , WS0) + (RS1, WS1)  orElse       (RS1, WS0) T2
+
+
+free: WS1  \ (WS0 and RS1)
+
+
+t0 : writeTVar t7 42 
+t1 : writeTvar t7 73 
+
+N.B:
+Read set and Write set.... must be immutable data structure
+If we use mutable data structure... then it will be really hard to handle . 
+
+
+remote read is not possible
+remote write is possible in erlang
+
+why?
+parts of internet crash..... 
+to maintain robustness.
+
+transaction environment: 
+---------------------------------
+
+

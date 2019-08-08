@@ -1,0 +1,441 @@
+31> sieve:firstNPrimes(10).
+StartingPoint: 10
+primeLoop(P,N): 10
+primes()
+collector(Sieve)
+allNumbers(N): 2
+sieve(Prev)
+collector(Sieve) {nextPrim,P}
+allNumbers(N) {next,P}: 2
+allNumbers(N): 3
+sieve(Prev) {num,N}: 2
+sieve(Prev) {prim,Collector}
+filter(Prim,Prev)
+sieve(Prev)
+collector(Sieve) {prim,N,NextSieve}: 2
+collector(Sieve)
+filter(Prim,Prev) {next,P}
+primeLoop(P,N) {prim, Prim}, GotPrim = 2
+getNext(Prim,Prev)
+primeLoop(P,N): 9
+allNumbers(N) {next,P}: 3
+collector(Sieve) {nextPrim,P}
+allNumbers(N): 4
+getNext(Prim,Prev) {num,N}: 3
+filter(Prim,Prev)
+sieve(Prev) {num,N}: 3
+sieve(Prev) {prim,Collector}
+filter(Prim,Prev)
+sieve(Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+collector(Sieve) {prim,N,NextSieve}: 3
+collector(Sieve)
+primeLoop(P,N) {prim, Prim}, GotPrim = 3
+primeLoop(P,N): 8
+collector(Sieve) {nextPrim,P}
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 4
+allNumbers(N): 5
+getNext(Prim,Prev) {num,N}: 4
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 5
+allNumbers(N): 6
+getNext(Prim,Prev) {num,N}: 5
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 5
+filter(Prim,Prev)
+sieve(Prev) {num,N}: 5
+sieve(Prev) {prim,Collector}
+filter(Prim,Prev)
+sieve(Prev)
+collector(Sieve) {prim,N,NextSieve}: 5
+collector(Sieve)
+filter(Prim,Prev) {next,P}
+primeLoop(P,N) {prim, Prim}, GotPrim = 5
+getNext(Prim,Prev)
+primeLoop(P,N): 7
+filter(Prim,Prev) {next,P}
+collector(Sieve) {nextPrim,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 6
+allNumbers(N): 7
+getNext(Prim,Prev) {num,N}: 6
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 7
+allNumbers(N): 8
+getNext(Prim,Prev) {num,N}: 7
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 7
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 7
+filter(Prim,Prev)
+sieve(Prev) {num,N}: 7
+sieve(Prev) {prim,Collector}
+filter(Prim,Prev)
+sieve(Prev)
+collector(Sieve) {prim,N,NextSieve}: 7
+collector(Sieve)
+filter(Prim,Prev) {next,P}
+primeLoop(P,N) {prim, Prim}, GotPrim = 7
+getNext(Prim,Prev)
+primeLoop(P,N): 6
+filter(Prim,Prev) {next,P}
+collector(Sieve) {nextPrim,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 8
+allNumbers(N): 9
+getNext(Prim,Prev) {num,N}: 8
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 9
+allNumbers(N): 10
+getNext(Prim,Prev) {num,N}: 9
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 9
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 10
+allNumbers(N): 11
+getNext(Prim,Prev) {num,N}: 10
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 11
+allNumbers(N): 12
+getNext(Prim,Prev) {num,N}: 11
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 11
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 11
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 11
+filter(Prim,Prev)
+sieve(Prev) {num,N}: 11
+sieve(Prev) {prim,Collector}
+filter(Prim,Prev)
+sieve(Prev)
+collector(Sieve) {prim,N,NextSieve}: 11
+collector(Sieve)
+filter(Prim,Prev) {next,P}
+primeLoop(P,N) {prim, Prim}, GotPrim = 11
+getNext(Prim,Prev)
+primeLoop(P,N): 5
+filter(Prim,Prev) {next,P}
+collector(Sieve) {nextPrim,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 12
+allNumbers(N): 13
+getNext(Prim,Prev) {num,N}: 12
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 13
+allNumbers(N): 14
+getNext(Prim,Prev) {num,N}: 13
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 13
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 13
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 13
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 13
+filter(Prim,Prev)
+sieve(Prev) {num,N}: 13
+sieve(Prev) {prim,Collector}
+filter(Prim,Prev)
+sieve(Prev)
+collector(Sieve) {prim,N,NextSieve}: 13
+collector(Sieve)
+filter(Prim,Prev) {next,P}
+primeLoop(P,N) {prim, Prim}, GotPrim = 13
+getNext(Prim,Prev)
+primeLoop(P,N): 4
+filter(Prim,Prev) {next,P}
+collector(Sieve) {nextPrim,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 14
+allNumbers(N): 15
+getNext(Prim,Prev) {num,N}: 14
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 15
+allNumbers(N): 16
+getNext(Prim,Prev) {num,N}: 15
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 15
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 16
+allNumbers(N): 17
+getNext(Prim,Prev) {num,N}: 16
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 17
+allNumbers(N): 18
+getNext(Prim,Prev) {num,N}: 17
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 17
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 17
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 17
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 17
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 17
+filter(Prim,Prev)
+sieve(Prev) {num,N}: 17
+sieve(Prev) {prim,Collector}
+filter(Prim,Prev)
+sieve(Prev)
+collector(Sieve) {prim,N,NextSieve}: 17
+collector(Sieve)
+filter(Prim,Prev) {next,P}
+primeLoop(P,N) {prim, Prim}, GotPrim = 17
+getNext(Prim,Prev)
+primeLoop(P,N): 3
+filter(Prim,Prev) {next,P}
+collector(Sieve) {nextPrim,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 18
+allNumbers(N): 19
+getNext(Prim,Prev) {num,N}: 18
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 19
+allNumbers(N): 20
+getNext(Prim,Prev) {num,N}: 19
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 19
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 19
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 19
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 19
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 19
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 19
+filter(Prim,Prev)
+sieve(Prev) {num,N}: 19
+sieve(Prev) {prim,Collector}
+filter(Prim,Prev)
+sieve(Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+collector(Sieve) {prim,N,NextSieve}: 19
+collector(Sieve)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+primeLoop(P,N) {prim, Prim}, GotPrim = 19
+primeLoop(P,N): 2
+collector(Sieve) {nextPrim,P}
+allNumbers(N) {next,P}: 20
+allNumbers(N): 21
+getNext(Prim,Prev) {num,N}: 20
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 21
+allNumbers(N): 22
+getNext(Prim,Prev) {num,N}: 21
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 21
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 22
+allNumbers(N): 23
+getNext(Prim,Prev) {num,N}: 22
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 23
+allNumbers(N): 24
+getNext(Prim,Prev) {num,N}: 23
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 23
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 23
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 23
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 23
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 23
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 23
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 23
+filter(Prim,Prev)
+sieve(Prev) {num,N}: 23
+sieve(Prev) {prim,Collector}
+filter(Prim,Prev)
+sieve(Prev)
+collector(Sieve) {prim,N,NextSieve}: 23
+collector(Sieve)
+filter(Prim,Prev) {next,P}
+primeLoop(P,N) {prim, Prim}, GotPrim = 23
+getNext(Prim,Prev)
+primeLoop(P,N): 1
+filter(Prim,Prev) {next,P}
+collector(Sieve) {nextPrim,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 24
+allNumbers(N): 25
+getNext(Prim,Prev) {num,N}: 24
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 25
+allNumbers(N): 26
+getNext(Prim,Prev) {num,N}: 25
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 25
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 25
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 26
+allNumbers(N): 27
+getNext(Prim,Prev) {num,N}: 26
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 27
+allNumbers(N): 28
+getNext(Prim,Prev) {num,N}: 27
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 27
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 28
+allNumbers(N): 29
+getNext(Prim,Prev) {num,N}: 28
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 29
+allNumbers(N): 30
+getNext(Prim,Prev) {num,N}: 29
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 29
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 29
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 29
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 29
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 29
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 29
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 29
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 29
+filter(Prim,Prev)
+sieve(Prev) {num,N}: 29
+sieve(Prev) {prim,Collector}
+filter(Prim,Prev)
+sieve(Prev)
+collector(Sieve) {prim,N,NextSieve}: 29
+collector(Sieve)
+filter(Prim,Prev) {next,P}
+primeLoop(P,N) {prim, Prim}, GotPrim = 29
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+[2,3,5,7,11,13,17,19,23,29]
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+filter(Prim,Prev) {next,P}
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 30
+allNumbers(N): 31
+getNext(Prim,Prev) {num,N}: 30
+getNext(Prim,Prev)
+allNumbers(N) {next,P}: 31
+allNumbers(N): 32
+getNext(Prim,Prev) {num,N}: 31
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 31
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 31
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 31
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 31
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 31
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 31
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 31
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 31
+filter(Prim,Prev)
+getNext(Prim,Prev) {num,N}: 31
+filter(Prim,Prev)
+sieve(Prev) {num,N}: 31
+32> 

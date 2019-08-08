@@ -11,7 +11,8 @@ startN([Delay|Delays]) ->
 start(Value, Delay) ->
   Gui = counterGui:start(Value, self()),
   process_flag(trap_exit, true),
-  spawn_link(fun() -> tick(Delay,self())end),
+  Me = self(),
+  spawn_link(fun() -> tick(Delay,Me) end),
   counter(Value, Delay, [Gui], true).
 
 % Main process of a counter
@@ -19,6 +20,7 @@ counter(_, _, [], _) -> exit('No More counters left'); % exit(Reason) to stop th
 counter(Value, Delay, Guis, Active) ->
   receive
     start ->
+      base:printLn("Start action received"),
       counter(Value, Delay, Guis, true);
     stop  ->
       counter(Value, Delay, Guis, false);
@@ -33,6 +35,7 @@ counter(Value, Delay, Guis, Active) ->
     tick ->
       case Active of
         true ->
+          %base:printLn("Got a tick "),
           sendAll({setValue,Value+1},Guis),
           counter(Value+1, Delay, Guis, Active);
         false ->
@@ -47,6 +50,7 @@ counter(Value, Delay, Guis, Active) ->
 % Timer
 tick(Delay, Pid) ->
   timer:sleep(Delay),
+  %base:printLn("tick notification , sending to Pid"),
   Pid!tick,
   tick(Delay,Pid).
 

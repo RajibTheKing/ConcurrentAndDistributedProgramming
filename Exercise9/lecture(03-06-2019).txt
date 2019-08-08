@@ -1,0 +1,5 @@
+different transaction composition: 
+1. Sequential
+2. branching
+
+

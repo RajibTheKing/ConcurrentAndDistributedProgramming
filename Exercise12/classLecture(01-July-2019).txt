@@ -1,0 +1,79 @@
+--Read and Write in Communication Abstraction 
+
+--distribute transactions over the network
+
+--commit phase
+i) locking all tvars
+ii) validate all readTvars 
+iii) valid? 
+      Yes -> commit changes
+      No -> unlock TVars, rollback 
+
+
+** Controller crash cannot be  detected  , resource is blocked 
+
+main two solution : 2PC + 3PC 
+
+Phase Commit = PC 
+
+
+steps : prepare, commit , abort 
+Controller                            C1                        C2              C3 
+--------------------------------------------------------------------------------------
+Prepare Msg 1    ---------------------->
+Prepare Msg 2   ------------------------------------------------>
+Prepare msg 3   ----------------------------------------------------------------> 
+    <------------------------------------------------------- Commit
+    <------------------------------ Commit
+    <------------------------------------------------------------------------ Commit  
+Commit Reply Msg    ---------------------->
+Commit Reply Msg   ------------------------------------------------>
+Commit Reply Msg   ---------------------------------------------------------------->
+
+Two phase commit protocol 
+
+
+https://dbs.uni-leipzig.de/buecher/mrdbs/mrdbs-66.html
+
+https://en.wikipedia.org/wiki/Two-phase_commit_protocol
+
+https://en.wikipedia.org/wiki/Three-phase_commit_protocol
+
+
+monitor in python 
+mvar in python 
+channel in python 
+
+erlang chan 
+erlang mvar 
+erlang tvar 
+erlang semaphore 
+erlang message passing 
+erlang stick
+erlang channel 
+erlang stack 
+erlang generic server 
+erlang distributed setting , communication abstraction 
+erlang linda server , model 
+
+LTL checking, testing, varification, normalization. F infinity or something 
+Model checking, varification in erlang not possible, what are the reasons  
+
+erlang Turing Machine, run time stackes 
+erlang stack, tail recursion 
+
+transaction framework, Haskell and erlang 
+transaction are composable... what is the meaning of it. 
+what kind of composition is possible . 
+what is sequenctial , branching composition. 
+How to implement using read set and write set. 
+
+
+ACID property .. 
+pessimistic transaction, optimistic transaction, database
+2p , 3p commit protocol 
+ 
+
+implementations.... 
+
+

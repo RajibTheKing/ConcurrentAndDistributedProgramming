@@ -1,0 +1,7 @@
+define updated stm version
+-----------------------------------
+
+
+** if we have intermediate transaction between completing process... we can kill the process
+
+** 

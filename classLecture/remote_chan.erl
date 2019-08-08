@@ -5,7 +5,7 @@
 new_chan() ->
     {ok,LSock} = gen_tcp:listen(0, [list, {packet,line}, {reuseaddr,true}]),
     {ok,Port} = inet:port(LSock),
-    Chan = {local_chan,spawn(fun() -> chan() end),net_adm:localhost(),Port},
+    Chan = {local_chan,spawn(fun() -> chan() end),{127,0,0,1},Port},
     spawn(fun() -> portListener(LSock,Chan) end),
     Chan.
 

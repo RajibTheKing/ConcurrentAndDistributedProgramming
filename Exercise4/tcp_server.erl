@@ -1,8 +1,14 @@
 -module(tcp_server).
 -export([start/0]).
 
+-define(TCP_OPTS, [
+    list, 
+    {packet, line},
+    {reuseaddr, true}
+]).
+
 start() ->
-    {ok, ListenSocket} = gen_tcp:listen(8091, [{active,true}, binary]),
+    {ok, ListenSocket} = gen_tcp:listen(65065, ?TCP_OPTS),
     spawn(fun() -> portListener(ListenSocket, self()) end),
     serverloop([]).
     
@@ -18,15 +24,24 @@ serverloop(SocketList) ->
 
 
 portListener(ListenSocket, ServerPid) ->
+    spawn(fun() -> acceptThread(ListenSocket, self(), ServerPid) end),
+    receive
+        {next, Sock} ->
+            ServerPid ! {new_client, Sock},
+            portListener(ListenSocket, ServerPid)
+    end.
+
+acceptThread(ListenSocket, NotifyPid, ServerPid) ->
     base:printLn("Waiting for new Client to accept"),
     {ok, AcceptSocket} = gen_tcp:accept(ListenSocket),
     base:printLn("New Client accepted"),
-    ServerPid ! {new_client, AcceptSocket},
-    spawn(fun() -> receiverProcess(AcceptSocket, ServerPid) end),
-    portListener(ListenSocket, ServerPid).
-
+    NotifyPid ! {next, AcceptSocket},
+    receiverProcess(AcceptSocket, ServerPid).
 
 receiverProcess(Sock, ServerPid) ->
-    {ok,ClientMsg} = gen_tcp:recv(Sock,0),
-    ServerPid ! {client_message, ClientMsg},
-    receiverProcess(Sock, ServerPid).
+    receive
+        {tcp,Sock,Str} ->
+            base:printLn("Received Message: " ++ base:show(Str)),
+            
+            receiverProcess(Sock, ServerPid)
+    end.

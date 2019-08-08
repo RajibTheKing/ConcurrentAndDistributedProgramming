@@ -4,7 +4,7 @@
                      write_chan/2,serialize/1]).
 
 start_ping() -> Chan = new_chan(),
-                chan_register("localhost","ping",Chan),
+                chan_register({127,0,0,1},"ping",Chan),
                 ping_loop(Chan,0).
 
 ping_loop(Chan,N) -> 

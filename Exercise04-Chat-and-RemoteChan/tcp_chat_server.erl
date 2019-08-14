@@ -20,6 +20,10 @@ request_handler(LSock,Chat_server,Parent) ->
   request_handler_loop(Sock,Chat_server).
 
 %Receive tcp messages and forward them to the chat server
+%44 = ,
+%10 = \n
+
+
 request_handler_loop(Sock,Chat_server) ->
   receive
     {tcp,Sock,Str} ->

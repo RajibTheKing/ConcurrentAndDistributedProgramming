@@ -1,7 +1,7 @@
 -module(remote_chan).
 -export([new_chan/0,chan_register/3,chan_lookup/2,
          read_chan/1,write_chan/2]).
-
+        
 new_chan() ->
     {ok,LSock} = gen_tcp:listen(0, [list, {packet,line}, {reuseaddr,true}]),
     {ok,Port} = inet:port(LSock),
@@ -22,6 +22,7 @@ portListener(LSock,Chan) ->
   end.
 
 chan_register(Host,Name,Chan) ->
+  base:printLn("Sending to keyValueServerTCP to register"),
   case gen_tcp:connect(Host,65002,[list,{packet,line},{active,false}]) of
     {ok,Sock} -> gen_tcp:send(Sock,"store," ++ Name ++ "," ++
                                    serialize(Chan) ++ "\n");

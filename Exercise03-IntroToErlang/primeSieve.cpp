@@ -7,7 +7,7 @@ int prime[1000000];
 bool flag[sz+1000];
 unsigned long long ans[5000100];
 
-void SieveOfEratosthenes()
+void SieveOfEratosthenes(int N)
 {
     int i, j, k=-1, r;
     for(i=3;i<=sz;i+=2)
@@ -32,7 +32,8 @@ void SieveOfEratosthenes()
     }
 
     cout<<prime[k]<<" "<<k<<endl;
-    for(int i=0; i<=10000; i++)
+    
+    for(int i=0; i<=N; i++)
     {
         cout<<"prime: "<<prime[i]<<" "<<i<<endl;
     }
@@ -42,6 +43,14 @@ void SieveOfEratosthenes()
 // Driver Program to test above function 
 int main() 
 {  
-	SieveOfEratosthenes(); 
+	int N;
+	cin>>N;
+	SieveOfEratosthenes(N); 
 	return 0; 
 } 
+
+
+
+
+
+

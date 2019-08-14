@@ -15,6 +15,7 @@ acceptLoop(LSock,DB) ->
 
 requestHandler(LSock,DB,Parent) ->
   {ok,Sock} = gen_tcp:accept(LSock),
+  base:printLn("A new Socket is Accepted"),
   Parent ! next,
   receive
     {tcp,Sock,Str} ->
@@ -28,7 +29,7 @@ requestHandler(LSock,DB,Parent) ->
              DB ! {lookup,Key,self()},
              receive
                {just,Ans} -> gen_tcp:send(Sock,"{just," ++ Ans ++ "}\n");
-               noting     -> gen_tcp:send(Sock,"nothing\n")
+               nothing     -> gen_tcp:send(Sock,"nothing\n")
              end
        end
   end,

@@ -5,7 +5,7 @@ gen(N) ->
     base:printLn("Lets start generating Primes "),
     NextNumber = spawn(fun() -> nextNumber(2) end),
     base:printLn("AllNumber pid = " ++ base:show(NextNumber)),
-    primeCollector(NextNumber, N).
+    primeCollector(NextNumber, N, 1).
 
 
 nextNumber(Num) ->
@@ -31,15 +31,15 @@ getNext(CurPrime, ParentProcess) ->
                         end
     end.
 
-primeCollector(_, 0) -> ok;
+primeCollector(_, 0, _) -> ok;
 
-primeCollector(ToCall, UpTo) ->
+primeCollector(ToCall, UpTo, Idx) ->
     Me = self(),
     ToCall!{next, Me},
     receive
         {prime, N} ->
-            base:printLn("prime: " ++ base:show(N)),
+            base:printLn("prime: " ++ base:show(N) ++ " --> " ++ base:show(Idx)),
             NewProcess = spawn(fun() -> primeFlow(N, ToCall) end),
-            primeCollector(NewProcess, UpTo-1)
+            primeCollector(NewProcess, UpTo-1, Idx+1)
     end.
 

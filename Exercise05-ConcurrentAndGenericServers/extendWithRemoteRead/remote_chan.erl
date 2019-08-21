@@ -13,13 +13,19 @@ portListener(LSock,Chan) ->
     {ok,Sock} ->
       receive
         {tcp,Sock,MsgStr} ->
-           {remote_msg,Msg} = deserialize(MsgStr),
-           write_chan(Chan,Msg),
-           gen_tcp:close(Sock),
-           portListener(LSock,Chan)
+           case deserialize(MsgStr) of
+             {remote_msg,Msg} ->
+               write_chan(Chan,Msg),
+               gen_tcp:close(Sock),
+               portListener(LSock,Chan);
+             %%Added
+             remote_read ->
+               Value = read_chan(Chan),
+               gen_tcp:send(Sock, serialize(Value) ++ "\n"),
+               portListener(LSock,Chan)
+           end
       end
   end.
-
 chan_register(Host,Name,Chan) ->
   base:printLn("Sending to keyValueServerTCP to register"),
   case gen_tcp:connect(Host,65002,[list,{packet,line},{active,false}]) of
@@ -52,7 +58,20 @@ read_chan({local_chan,P,_,_}) ->
   P!{read,self()},
   receive
     {chanMsg,Msg} -> Msg
+  end;
+
+%%Added
+read_chan({remote_chan,Host,Port}) ->
+  case gen_tcp:connect(Host,Port,[list,{packet,line},{active,false}]) of
+    {ok,Sock} ->
+      gen_tcp:send(Sock,serialize(remote_read)++"\n"),
+      case gen_tcp:recv(Sock,0) of
+         {ok,Answer} ->
+            gen_tcp:close(Sock),
+            deserialize(Answer)
+      end
   end.
+
 
 write_chan({local_chan,P,_,_},Msg) ->
   P!{write,Msg};

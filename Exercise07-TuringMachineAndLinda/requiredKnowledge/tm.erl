@@ -1,8 +1,5 @@
--module(tm_solve).
+-module(tm).
 -export([new_stack/0,push/2,pop/1, test/0, tm_start/0]).
-
-%Use the implemenation shown in the lecture to implement a Turing machine for the language {a*b*c*}.
-
 
 tm_start() ->
   SR = new_blank_stack(),
@@ -20,44 +17,25 @@ delta(SL,SR,q0) ->
            delta(SL,SR,q0);
     "b" -> push(SL,"b"),
            delta(SL,SR,q1);
-    "c" -> push(SL,"c"),
-           delta(SL,SR,q2);
     blank -> push(SR,blank),
-             delta(SL,SR,f);
-    Other -> push(SL, Other),
-            delta(SL, SR, r)
+             delta(SL,SR,f)
   end;
 
 delta(SL,SR,q1) ->
   A = pop(SR),
   case A of
+    "a" -> push(SL,"a"),
+           delta(SL,SR,r);
     "b" -> push(SL,"b"),
            delta(SL,SR,q1);
-    "c" -> push(SL,"c"),
-           delta(SL,SR,q2);
     blank -> push(SR,blank),
-             delta(SL,SR,f);
-    Other -> push(SL, Other),
-            delta(SL, SR, r)
+             delta(SL,SR,f)
   end;
 
-
-delta(SL,SR,q2) ->
-  A = pop(SR),
-  case A of
-    "c" -> push(SL,"c"),
-           delta(SL,SR,q2);
-    blank -> push(SR,blank),
-             delta(SL,SR,f);
-    Other -> push(SL, Other),
-             delta(SL, SR, r)
-  end;
-
-
-delta(_SL, _SR, r) ->
+delta(SL,SR,r) ->
   failure;
 
-delta(_SL, _SR, f) ->
+delta(SL,SR,f) ->
   accept.
 
 output(S) ->

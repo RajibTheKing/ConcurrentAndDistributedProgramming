@@ -65,8 +65,8 @@ keyboard(Ts,Name) ->
       set_client_list(Ts,remove(Name,get_client_list(Ts)));
     ":who" ->
       Clients = read_client_list(Ts),
-      base:print("The following people are online: "),
-      base:print(Clients),
+      base:printLn("The following people are online: "),
+      base:printLn(Clients),
       keyboard(Ts,Name);
     _      ->
       write_message(Ts,{msg,Name,Str}),
@@ -109,7 +109,7 @@ get_message_by_id2(Ts,MessageId) ->
   Msg.
 
 % Timeout for messages as a simple garbage collection
-msg_timeout() -> 3000.
+msg_timeout() -> 10.
 
 % Remove an element from a list
 remove(X,XS) -> lists:filter(fun(Y)-> X/=Y end, XS).

@@ -72,10 +72,8 @@ class Chan :
      # It is not guaranteed that there are no other values in
     # in between the values of the list
     for i in range(0, len(listVal)):
-      hole = self.w.take()
-      new_hole = MVar()
-      hole.put((listVal[i], new_hole))
-      self.w.put(new_hole)
+      self.write(listVal[i])
+      
   
   def un_get(self, val): #add new element on using reader pointer
     # If the chan is empty and another thread is waiting to

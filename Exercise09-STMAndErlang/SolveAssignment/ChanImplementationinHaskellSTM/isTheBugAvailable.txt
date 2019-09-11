@@ -1,0 +1,1 @@
+As the Haskell implementation uses MVars, the bug would also happen, but isEmpty and unGet is not provided in the Haskell implementation.

@@ -1,6 +1,7 @@
 import threading
 import time
 
+
 class MVar :
 
   def __init__(self) :
@@ -73,10 +74,11 @@ class MVar :
       with self.r:
           while self.empty == True:
               self.r.wait()
-          self.r.notify()
+          
           with self.w:
               oldValue = self.content
               self.content = v
+              self.r.notify()
               return oldValue
 
   def takeWithTimeout(self, timeout):
@@ -110,3 +112,8 @@ class MVar :
               self.empty = False
               self.r.notify()
               return True
+
+
+
+mv = MVar()
+mv.put

@@ -15,7 +15,7 @@ main = do
   forkIO (phil s3 s4 3)
   forkIO (phil s4 s5 4)
   getLine
-  phil s1 s2 5
+  phil s5 s1 5
   
 newStick :: STM Stick
 newStick = do

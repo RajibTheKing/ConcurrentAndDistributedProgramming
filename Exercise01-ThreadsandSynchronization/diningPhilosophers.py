@@ -22,17 +22,14 @@ class Stick:
 
     def getStick(self):
         with self.conditionalLock:
-            while self.isUsed == True:
+            while self.isUsed:
                 self.conditionalLock.wait()
             self.isUsed = True
 
 
     def isAvailable(self):
         with self.conditionalLock:
-            if self.isUsed == True:
-                return False
-            else:
-                return True
+            return not self.isUsed
 
     def getStickID(self):
         return "Stick: " + str(self.stickID)
@@ -57,20 +54,19 @@ class Philosopher:
 
     def thinkMethod(self):
         print(self.getPhilosopherID() + ": is now thinking")
-        time.sleep(0.05)
+
     
     def eatMethod(self):
         print(self.getPhilosopherID() + ":  is now eating!!!!!!!!!!!!!!!!!!")
-        time.sleep(0.05)
 
     
     def getStick(self, stick):
-        print(self.getPhilosopherID() + ": will take " + stick.getStickID())
+        #print(self.getPhilosopherID() + ": will take " + stick.getStickID())
         stick.getStick()
-        print(self.getPhilosopherID() + ": has taken " + stick.getStickID())
+        #print(self.getPhilosopherID() + ": has taken " + stick.getStickID())
     
     def putStick(self, stick):
-        print(self.getPhilosopherID() + ":  is puting back" + stick.getStickID())
+        #print(self.getPhilosopherID() + ":  is puting back" + stick.getStickID())
         stick.putBack()
         
     #First take left stick, then take right stick when it's available. Otherwise put left stick back

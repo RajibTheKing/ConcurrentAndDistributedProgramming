@@ -5,7 +5,7 @@
 %accepted string: aaabbbccc, aabbcc, abc, aaaabbbbcccc
 %failed string: aabbccc, aaabbc, aabbcca
 
-
+%%aaabbbccc
 tm_start() ->
   SR = new_blank_stack(),
   Input = base:getLn(),

@@ -4,6 +4,8 @@
                      write_chan/2,serialize/1]).
 
 start_ping() -> Chan = new_chan(),
+                base:printLn("Inside Start Ping"),
+                base:printLn(base:show(Chan)),
                 chan_register({127,0,0,1},"ping",Chan),
                 ping_loop(Chan,0).
 

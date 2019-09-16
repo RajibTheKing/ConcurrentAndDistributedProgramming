@@ -23,7 +23,8 @@ portListener(LSock,Chan) ->
 chan_register(Host,Name,Chan) ->
   base:printLn("Sending to keyValueServerTCP to register"),
   case gen_tcp:connect(Host,65002,[list,{packet,line},{active,false}]) of
-    {ok,Sock} -> gen_tcp:send(Sock,"store," ++ Name ++ "," ++
+    {ok,Sock} -> base:printLn(base:show(serialize(Chan))),
+      gen_tcp:send(Sock,"store," ++ Name ++ "," ++
                                    serialize(Chan) ++ "\n");
     Other -> base:printLn("chanregister errror: "++ base:show(Other))
   end.
@@ -55,9 +56,10 @@ read_chan({local_chan,P,_,_}) ->
   end.
 
 write_chan({local_chan,P,_,_},Msg) ->
+  base:printLn("Inside local_chan write"),
   P!{write,Msg};
 write_chan({remote_chan,Host,Port},Msg) ->
-
+  base:printLn("Inside remote_chan write"),
   case gen_tcp:connect(Host,Port,[list,{packet,line},{active,false}]) of
     {ok,Sock} ->
       gen_tcp:send(Sock,serialize({remote_msg,Msg})++"\n"),

@@ -10,24 +10,26 @@ start() -> ltl:start(),
            dec(S).
 
 store(V) ->
+  base:printLn("How!!!! " ++ base:show(V)),
   receive
-    {lookup,P} -> P!V, store(V);
+    {lookup,inc, P} -> base:printLn("returing to inc: " ++ base:show(V)), P!V, store(V);
+    {lookup,dec, P} -> base:printLn("------------------Dec return: " ++ base:show(V)), P!V, store(V);
     {set,V1}   -> store(V1)
   end.
 
-inc(S) -> S!{lookup,self()},
+inc(S) -> S!{lookup, inc, self()},
           receive
             V -> base:printLn("Inc: " ++ base:show(V)), newProp(csInc), S!{set,V+1}
           end,
-          releaseProp(csInc).
-          %inc(S).
+          releaseProp(csInc),
+          inc(S).
 
-dec(S) -> S!{lookup,self()},
+dec(S) -> S!{lookup,dec,self()},
           receive
             V -> base:printLn("Dec: " ++ base:show(V)), newProp(csDec), S!{set,V-1}
           end,
-          releaseProp(csDec).
-          %dec(S).
+          releaseProp(csDec),
+          dec(S).
 
 
 %main() -> ltl:start(),

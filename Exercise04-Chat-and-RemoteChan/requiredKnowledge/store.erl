@@ -4,6 +4,7 @@
 start() -> store_loop([]).
 
 store_loop(DB) ->
+  base:printLn(base:show(DB)),
   receive
     {store,Key,Value} -> store_loop(insert(Key,Value,DB));
     {lookup,Key,CPid} -> CPid ! lookup(Key,DB),

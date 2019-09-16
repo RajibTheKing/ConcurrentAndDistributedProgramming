@@ -27,7 +27,8 @@ getNext(CurPrime, ParentProcess) ->
                         end
     end.
 
-init([]) -> 
+init([]) ->
+    base:printLn("--------------------Inside Init function"), 
     {ok, done}.
 
 handle_call({parentProcess, ToCall}, _From, _State) ->
@@ -44,13 +45,13 @@ handle_cast(_Msg, _State) -> not_implemented.
 firstNPrime(N) ->
     ToCall = spawn(fun() -> nextNumber(2) end),
     base:printLn("I am starting with " ++ base:show(N)),
-    gen_server:start_link({local, genSieve}, ?MODULE, [], []),
+    gen_server:start_link( {local, mySieve}, ?MODULE, [], []),
     myloop(ToCall, N).
 
 
 myloop(_ToCall, 0) -> ok;
 myloop(ToCall, N) ->
-    {V, Process} = gen_server:call(?MODULE, {parentProcess, ToCall}),
+    {V, Process} = gen_server:call(mySieve, {parentProcess, ToCall}),
     base:printLn("Here: " ++ base:show(V) ++ " and " ++ base:show(Process)),
     myloop(Process, N-1).
 

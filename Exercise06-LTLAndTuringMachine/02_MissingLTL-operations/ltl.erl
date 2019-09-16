@@ -157,3 +157,5 @@ step(Phi) -> base:printLn("Unexpected formula in step: "++
 
 
 
+check({f,Cnt,Phi},Props) -> check(disj(Phi,x(f(Cnt+1,Phi))),Props); 
+check({g,Cnt,Phi},Props) -> check(conj(Phi,x(g(Cnt+1,Phi))),Props);

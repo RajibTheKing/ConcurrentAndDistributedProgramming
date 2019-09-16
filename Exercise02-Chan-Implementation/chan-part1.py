@@ -89,7 +89,7 @@ class Chan :
 
 def producer(chanObj,n) :
   for i in range(n):
-    chanObj.un_get(i)
+    chanObj.un_get(1)
 
 def consumer(chanObj) :
 
@@ -105,28 +105,30 @@ def consumer(chanObj) :
 
 ch = Chan()
 
-t1 = threading.Thread(target=producer, args=(ch,5))
-#t2 = threading.Thread(target=producer, args=(ch,1000))
-#t3 = threading.Thread(target=producer, args=(ch,1000))
-#t4 = threading.Thread(target=producer, args=(ch,1000))
+t1 = threading.Thread(target=producer, args=(ch,1000))
+t2 = threading.Thread(target=producer, args=(ch,1000))
+t3 = threading.Thread(target=producer, args=(ch,1000))
+t4 = threading.Thread(target=producer, args=(ch,1000))
+
 c1 = threading.Thread(target=consumer, args=(ch,))
-#c2 = threading.Thread(target=consumer, args=(ch,))
-#c3 = threading.Thread(target=consumer, args=(ch,))
-#c4 = threading.Thread(target=consumer, args=(ch,))
+c2 = threading.Thread(target=consumer, args=(ch,))
+c3 = threading.Thread(target=consumer, args=(ch,))
+c4 = threading.Thread(target=consumer, args=(ch,))
 
 t1.start()
-#t2.start()
-#t3.start()
-#t4.start()
+t2.start()
+t3.start()
+t4.start()
+
 c1.start()
-#c2.start()
-#c3.start()
-#c4.start()
+c2.start()
+c3.start()
+c4.start()
 
 input()
 
 ch.write(-1)
-#ch.write(-1)
-#ch.write(-1)
-#ch.write(-1)
+ch.write(-1)
+ch.write(-1)
+ch.write(-1)
 

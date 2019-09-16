@@ -63,7 +63,7 @@ erlang Turing Machine, run time stackes
 erlang stack, tail recursion 
 
 transaction framework, Haskell and erlang 
-transaction are composable... what is the meaning of it. 
+transaction are composable... what is the meaning of it.    Small transactions can be glued together to form a large transactions. 
 what kind of composition is possible . 
 what is sequenctial , branching composition. 
 How to implement using read set and write set. 

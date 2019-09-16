@@ -15,7 +15,7 @@ accept_loop(LSock,Chat_server) ->
   end.
 
 request_handler(LSock,Chat_server,Parent) ->
-  {ok, Sock} = gen_tcp:accept(LSock),
+  {ok, Sock} = gen_tcp:accept(LSock), %blocked
   Parent ! next,
   request_handler_loop(Sock,Chat_server).
 
@@ -27,6 +27,7 @@ request_handler(LSock,Chat_server,Parent) ->
 request_handler_loop(Sock,Chat_server) ->
   receive
     {tcp,Sock,Str} ->
+      base:printLn("Exactly ---> " ++ Str),
       case lists:splitwith(fun(C) -> C/=44 end, lists:delete(10,Str)) of
         {"login",[_|Name]} ->
           Chat_server!{login,Name,Sock},

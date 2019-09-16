@@ -42,8 +42,10 @@ lock(TVar) ->
 unlock(TVar) ->
   TVar!unlock.
 
+%TVar and A process wchich is suspending this TVar
 susp(TVar,P) ->
   TVar ! {new_susp,P}.
+
 
 read_tvar(TVar) ->
   {RS,WS} = get(state),
@@ -56,7 +58,7 @@ read_tvar(TVar) ->
         {value,Version} -> V;
         {value,_}       -> throw(rollback)
       end;
-    {value,V} -> V
+    {value,V} -> V 
   end.
 
 write_tvar(TVar,Value) ->
@@ -66,13 +68,20 @@ write_tvar(TVar,Value) ->
 
 retry() -> throw(retry).
 
+
+%OrElse: The transaction s1 ‘orElse‘ s2 first runs s1; if it retries, then
+%  s1 is abandoned with no effect, and s2 will execute. If s2 retries as well,
+%  the entire call retries — but it waits on the variables read by either
+%  of the two nested transactions.
+
+
 or_else(T1,T2) ->
   {_,WS0} = get(state),
   case catch T1() of
     rollback -> throw(rollback);
     retry -> {RS1,_WS1} = get(state),
-             put(state,{RS1,WS0}),
-             T2();
+             put(state,{RS1,WS0}),  % I don't know why I am using updated RS1. 
+             T2();                  % Do I need to catch retry for the second Transactions as well?? This is ambiguous
     Res -> Res
   end.
 
@@ -130,9 +139,11 @@ commit(WL) -> lists:map(fun({TVar,V}) -> core_write(TVar,V) end, WL).
 
 
 otherProcess(Tvar) ->
+  lock(Tvar),
   core_write(Tvar, 15),
   NowValue = core_read(Tvar),
-  base:printLn(base:show(NowValue) ++ " Now Changed value from otherProcess\n").
+  base:printLn(base:show(NowValue) ++ " Now Changed value from otherProcess\n"),
+  unlock(Tvar).
 
 
 
@@ -141,7 +152,8 @@ testLock() ->
   lock(TvarPid),
   spawn(fun() -> otherProcess(TvarPid) end),
   TestValue = core_read(TvarPid),
-  base:printLn(base:show(TestValue) ++ " Now Changed value from Main process\n").
+  base:printLn(base:show(TestValue) ++ " Now Changed value from Main process\n"),
+  unlock(TvarPid).
 
 
 

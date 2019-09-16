@@ -36,7 +36,7 @@ readChan ch v = do
   queue <- readTVar ch
   case queue of
     (x:xs) -> do 
-              pwriteTVar ch xs
+              writeTVar ch xs
               return x
     []     -> retry
 
